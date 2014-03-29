@@ -54,4 +54,18 @@ angular
             templateUrl: 'templates/spinner.html',
             replace: true
         };
+    }).factory('ResultsService', function() { // ugly global state
+        var lastResults;
+
+        return {
+            setLastResults: function(value) {
+                lastResults = value;
+            },
+            getLastResults: function() {
+                return lastResults;
+            },
+            clearLastResults: function() {
+                lastResults = undefined;
+            }
+        };
     });
