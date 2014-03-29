@@ -17,6 +17,8 @@ admin.autodiscover()
 urlpatterns = patterns(
     'django.contrib.staticfiles.views',
     url(r'^(?:index.html)?$', 'serve', kwargs={'path': 'index.html'}),
+    url(r'^(?P<path>fonts/.*)$', 'serve'),
+    url(r'^(?P<path>templates/.*)$', 'serve'),
     url(r'^(?P<path>scripts/.*)$', 'serve'),
     url(r'^(?P<path>styles/.*)$', 'serve'),
     url(r'^(?P<path>views/.*)$', 'serve'),
