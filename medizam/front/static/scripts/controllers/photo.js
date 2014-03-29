@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('medizam')
-  .controller('PhotoCtrl', [ '$scope', '$resource', 'ResultsService', function ($scope, $resource, resultsService) {
+  .controller('PhotoCtrl', [ '$scope', '$resource', '$location', 'ResultsService', function ($scope, $resource, $location, resultsService) {
         var Files = $resource('/api/upload');
 
         $scope.inProgress = false;
@@ -14,8 +14,9 @@ angular.module('medizam')
                 resultsService.clearLastResults();
 
                 Files.prototype.$save.call(model.file, function(response) {
-                    $scope.inProgress = false;
                     resultsService.setLastResults(response.results);
+                    $scope.inProgress = false;
+                    $location.path('/results');
                 });
             }
         });
