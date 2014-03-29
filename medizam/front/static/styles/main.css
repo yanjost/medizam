@@ -111,7 +111,7 @@ body {
 .gallery-item {
     background-color: rgba(255,255,255,0.5);
     margin: 10px 0 10px 10px;
-    width: calc(50% - 15px);
+    width: calc(50% - 20px);
 }
 
 .gallery-item a {
@@ -142,6 +142,17 @@ body {
 
 .gallery-item span.low {
     color: #cd0000;
+}
+
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .spinner {
