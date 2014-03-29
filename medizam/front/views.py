@@ -1,4 +1,5 @@
 import json
+import time
 import django.http
 from django.shortcuts import render
 
@@ -30,9 +31,19 @@ def upload(request):
     # response_data['filename'] = uploaded_file.name
     # response_data['filesize'] = uploaded_file.size
 
-    open("received.jpg","w").write(request.body)
+    pic_path = "tmp/received.jpg"
 
-    path, contours = process_picture("received.jpg")
+    if os.path.exists(pic_path):
+        os.remove(pic_path)
+
+    f = open(pic_path,"w")
+    f.write(request.body)
+    f.close()
+
+    # time.sleep(5)
+
+
+    path, contours = process_picture(pic_path)
 
     shape_name = identify_shape(contours)
 
@@ -84,7 +95,15 @@ def process_picture(path):
     #         # cv2.imshow('output',drawing)
     #     # cv2.imshow('input',img)
 
+    if not os.path.exists(src):
+        raise Exception("File not found "+src)
+
+    print "READING : "+src
+
     img = cv2.imread(src)
+
+    print "IMG SHAPE : {}".format(img.shape)
+
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
 
