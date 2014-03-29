@@ -22,4 +22,5 @@ urlpatterns = patterns(
     url(r'^(?P<path>views/.*)$', 'serve'),
     url(r'^(?P<path>libs/.*)$', 'serve'),
     url(r'^(?P<path>images/.*)$', 'serve'),
+    url(r'^api', include('front.urls')),
     )
