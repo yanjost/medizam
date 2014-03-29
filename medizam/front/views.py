@@ -18,17 +18,19 @@ import cv2
 
 @csrf_exempt
 def upload(request):
+    # import pdb;
+    # pdb.set_trace()
     response_data = {}
     response_data['result'] = 'OK'
 
-    print request.FILES
+    # print request.FILES
+    #
+    # uploaded_file = request.FILES["file"]
+    #
+    # response_data['filename'] = uploaded_file.name
+    # response_data['filesize'] = uploaded_file.size
 
-    uploaded_file = request.FILES["file"]
-
-    response_data['filename'] = uploaded_file.name
-    response_data['filesize'] = uploaded_file.size
-
-    open("received.jpg","w").write(uploaded_file.read())
+    open("received.jpg","w").write(request.body)
 
     path, contours = process_picture("received.jpg")
 
