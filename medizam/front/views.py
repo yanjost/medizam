@@ -219,7 +219,7 @@ def process_picture(data):
 
     # ret,gray = cv2.threshold(gray,128,255,1)
 
-    cv2.imwrite("tmp/grey.jpg",gray)
+    #cv2.imwrite("tmp/grey.jpg",gray)
 
     blur = cv2.GaussianBlur(gray,(5,5),0)
 
@@ -241,7 +241,7 @@ def process_picture(data):
 
     out_path = os.path.join(current, out_path)
 
-    cv2.imwrite(out_path,gray)
+    #cv2.imwrite(out_path,gray)
 
     print out_path
 
@@ -376,6 +376,7 @@ def load_medocs():
             print data
             med = Medoc()
             med.id,med.name,med.dci,med.dose,med.shape,med.color1,med.color2,med.generic,med.details,med.vidal_url=data
+            if med.id.startswith("-"):continue
             med.load_image()
             med.id = med.id.strip()
             ret.append(med)

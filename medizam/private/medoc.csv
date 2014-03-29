@@ -1,7 +1,7 @@
 Numéro,Nom,DCI,Dosage,Forme,Couleur 1,Couleur 2,Princeps0/Gen1,Caracteristiques,URL Vidal
 1,Doliprane,Paracetamol,500,gelule,Jaune,Bleu,0,thermoforme,http://www.vidal.fr/Medicament/doliprane-5480.htm
 2,Ibuprofene,Ibuprofene,200,comprime,Rouge,0,1,enrobe,http://www.vidal.fr/Medicament/ibuprofene_arrow-18602.htm
-3,Stresam,Etifoxine,50,gelule,Blanc,Bleu,0,thermoforme,http://www.vidal.fr/Medicament/stresam-15614.htm
+-3,Stresam,Etifoxine,50,gelule,Blanc,Bleu,0,thermoforme,http://www.vidal.fr/Medicament/stresam-15614.htm
 4,Spasfon,Phloroglucinol,80,comprime,Rose,0,0,thermoforme,http://www.vidal.fr/Medicament/spasfon-15374.htm
 5,Zoloft,Sertraline,50,gelule,Jaune,Blanc,0,thermoforme,http://www.vidal.fr/Medicament/zoloft-18138.htm
 6,Inexium,Esomeprazole,20,comprime,rose pale,0,0,"Oblong, biconvexe, grave une face, autre face 'A/EI'",http://www.vidal.fr/Medicament/inexium-11724-formes_et_presentations.htm

@@ -66,6 +66,28 @@ def calcEM(hist1,hist2,h_bins,s_bins):
     #This is the important line were the OpenCV EM algorithm is called
     return cv.CalcEMD2(sig1,sig2,cv.CV_DIST_L2)
 
+def equalizeRgb(img):
+    #import pdb;pdb.set_trace()
+    ycrcb = cvtColor(cv2array(img), cv.CV_RGB2YCrCb)
+    channels = split(ycrcb)
+
+    equalizeHist(channels[0], channels[0])
+
+    merge(channels, ycrcb)
+
+    return array2cv(cvtColor(ycrcb, cv.CV_YCrCb2RGB))
+    # import numpy as np
+    # r,g,b = split(img)
+    # equalizeHist(r,r)
+    # equalizeHist(g,g)
+    # equalizeHist(b,b)
+    #
+    # blank_image = np.zeros((img.height,img.width,3), np.uint8)
+    #
+    # merge([r,g,b],blank_image)
+    #
+    # return blank_image
+
 ### MAIN ########################################################################
 def emm(src1,src2):
     # #Load image 1
@@ -73,6 +95,15 @@ def emm(src1,src2):
     #
     # #Load image 2
     src2 = cv.LoadImage(src2)
+
+    #normalize
+
+    # cv.EqualizeHist(src1,src1)
+    # cv.EqualizeHist(src2,src2)
+    #src1 = equalizeRgb(src1)
+    #src2 = equalizeRgb(src2)
+
+    imwrite("tmp/equalized.jpg",cv2array(src2))
 
     # Get histograms
     histSrc1= calcHistogram(src1)
@@ -83,3 +114,45 @@ def emm(src1,src2):
 
     #Print solution
     return histComp
+
+
+def cv2array(im):
+    import numpy as np
+
+    depth2dtype = {
+        cv.IPL_DEPTH_8U: 'uint8',
+        cv.IPL_DEPTH_8S: 'int8',
+        cv.IPL_DEPTH_16U: 'uint16',
+        cv.IPL_DEPTH_16S: 'int16',
+        cv.IPL_DEPTH_32S: 'int32',
+        cv.IPL_DEPTH_32F: 'float32',
+        cv.IPL_DEPTH_64F: 'float64',
+    }
+
+    arrdtype = im.depth
+    a = np.fromstring(
+        im.tostring(),
+        dtype=depth2dtype[im.depth],
+        count=im.width * im.height * im.nChannels)
+    a.shape = (im.height, im.width, im.nChannels)
+    return a
+
+
+def array2cv(a):
+    dtype2depth = {
+        'uint8': cv.IPL_DEPTH_8U,
+        'int8': cv.IPL_DEPTH_8S,
+        'uint16': cv.IPL_DEPTH_16U,
+        'int16': cv.IPL_DEPTH_16S,
+        'int32': cv.IPL_DEPTH_32S,
+        'float32': cv.IPL_DEPTH_32F,
+        'float64': cv.IPL_DEPTH_64F,
+    }
+    try:
+        nChannels = a.shape[2]
+    except:
+        nChannels = 1
+    cv_im = cv.CreateImageHeader((a.shape[1], a.shape[0]),
+                                 dtype2depth[str(a.dtype)], nChannels)
+    cv.SetData(cv_im, a.tostring(), a.dtype.itemsize * nChannels * a.shape[1])
+    return cv_im
