@@ -1,12 +1,17 @@
-<div class="container scrollable">
-    <div class="row gallery scrollable-content">
-        <div class="col-xs-6" data-ng-repeat="result in results">
-            <div class="row">
-                <a href="#" class="">
-                    <img data-ng-src="{{ result.image }}" />
-                </a>
-                <br/>
-                <span>{{ result.name }}</span>
+<div class="scrollable">
+    <div class="scrollable-content results-background">
+        <div class="container">
+            <div class="row gallery">
+                <div class="col-xs-6 gallery-item" data-ng-class="{ 'right': $index % 2 == 1 }"data-ng-repeat="result in results">
+                    <div class="row">
+                        <a class="">
+                            <img data-ng-src="{{ result.image }}" />
+                        </a>
+                        <hr/>
+                        <h2 style="text-align: center;">{{ result.name }}</h2>
+                        <h3 style="text-align: center;"><span data-ng-class="{ 'good': result.accuracy >= 75, 'average': result.accuracy < 75 && result.accuracy >= 50, 'low': result.accuracy < 50 }">{{ result.accuracy }}%</span></h3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

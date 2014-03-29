@@ -4,24 +4,29 @@ angular.module('medizam')
   .controller('ResultsCtrl', [ '$scope', function ($scope) {
         $scope.results = [
             {
-                name: "Doliprane 500mg",
-                image: "images/mocks/5B_3quart_low.jpg"
+                name: "Zoloft 50mg",
+                image: "images/mocks/5B_3quart_low.jpg",
+                accuracy: 80
             },
             {
-                name: "Doliprane 500mg",
-                image: "images/mocks/5B_3quart_low.jpg"
+                name: "Zoloft 50mg",
+                image: "images/mocks/5B_3quart_low.jpg",
+                accuracy: 72
             },
             {
-                name: "Doliprane 500mg",
-                image: "images/mocks/5B_3quart_low.jpg"
+                name: "Zoloft 50mg",
+                image: "images/mocks/5B_3quart_low.jpg",
+                accuracy: 64
             },
             {
-                name: "Doliprane 500mg",
-                image: "images/mocks/5B_3quart_low.jpg"
+                name: "Zoloft 50mg",
+                image: "images/mocks/5B_3quart_low.jpg",
+                accuracy: 49
             },
             {
-                name: "Doliprane 500mg",
-                image: "images/mocks/5B_3quart_low.jpg"
+                name: "Zoloft 50mg",
+                image: "images/mocks/5B_3quart_low.jpg",
+                accuracy: 39
             }
         ];
   }]);

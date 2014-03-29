@@ -6,6 +6,7 @@ angular
         'ngSanitize',
         'ngRoute',
         'mobile-angular-ui',
+        'mobile-angular-ui.scrollable',
         'ur.file'
     ])
     .config(function ($routeProvider) {
@@ -13,7 +14,8 @@ angular
             .when('/', {
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl',
-                title: 'MediZam!'
+                title: 'MedMatch',
+                hideTopbar: true
             })
             .when('/photo', {
                 templateUrl: 'views/photo.html',
@@ -45,5 +47,11 @@ angular
             $rootScope.hasBackAction = route.$$route.backActionLink && route.$$route.backActionName;
             $rootScope.backActionLink = route.$$route.backActionLink;
             $rootScope.backActionName = route.$$route.backActionName;
+            $rootScope.hideTopbar = route.$$route.hideTopbar || false;
         });
-    }]);
+    }]).directive('spinner', function() {
+        return {
+            templateUrl: 'templates/spinner.html',
+            replace: true
+        };
+    });
