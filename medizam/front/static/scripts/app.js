@@ -31,6 +31,10 @@ angular
                 backActionLink: '#/',
                 backActionName: 'Home'
             })
+            .when('/manual', {
+                templateUrl: 'views/description.html',
+                hideTopbar: true
+            })
             .when('/results/:id/details', {
                 templateUrl: 'views/result-details.html',
                 controller: 'ResultDetailsCtrl',
