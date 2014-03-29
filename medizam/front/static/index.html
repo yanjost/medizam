@@ -1,20 +1,37 @@
 <!doctype html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/main.css">
-    <script type="application/javascript" src="libs/angular.js"></script>
-    <script type="application/javascript" src="libs/angular-cookies.js"></script>
-    <script type="application/javascript" src="libs/angular-resource.js"></script>
-    <script type="application/javascript" src="libs/angular-sanitize.js"></script>
-    <script type="application/javascript" src="libs/angular-route.js"></script>
-  </head>
-  <body ng-app="medizam">
-    <div class="container" ng-view=""></div>
 
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
+    <meta HTTP-EQUIV="Expires" CONTENT="-1"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="libs/mobile-angular-ui/css/mobile-angular-ui-base.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="application/javascript" src="libs/jquery/jquery-2.1.0.js"></script>
+    <script type="application/javascript" src="libs/angularjs/angular.js"></script>
+    <script type="application/javascript" src="libs/angularjs/angular-resource.js"></script>
+    <script type="application/javascript" src="libs/angularjs/angular-sanitize.js"></script>
+    <script type="application/javascript" src="libs/angularjs/angular-route.js"></script>
+    <script type="application/javascript" src="libs/angularjs/angular-route.js"></script>
+    <script src="libs/mobile-angular-ui/js/mobile-angular-ui.js"></script>
+    <script src="libs/mobile-angular-ui/js/mobile-angular-ui-touch-fastclick.js"></script>
+    <script src="libs/mobile-angular-ui/js/mobile-angular-ui-scrollable-overthrow.js"></script>
+    <script src="libs/misc/angular-file.js"></script>
+</head>
+<body ng-app="medizam">
+<div class="app">
+    <div class="app-body" data-ng-view>
+    </div>
+</div>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/photo.js"></script>
+<script src="scripts/controllers/results.js"></script>
+<script src="scripts/controllers/result-details.js"></script>
 </body>
 </html>

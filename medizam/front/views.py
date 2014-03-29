@@ -9,17 +9,19 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def upload(request):
+    # import pdb;
+    # pdb.set_trace()
     response_data = {}
     response_data['result'] = 'OK'
 
-    print request.FILES
+    # print request.FILES
+    #
+    # uploaded_file = request.FILES["file"]
+    #
+    # response_data['filename'] = uploaded_file.name
+    # response_data['filesize'] = uploaded_file.size
 
-    uploaded_file = request.FILES["file"]
-
-    response_data['filename'] = uploaded_file.name
-    response_data['filesize'] = uploaded_file.size
-
-    open("received.jpg","w").write(uploaded_file.read())
+    open("received.jpg","w").write(request.body)
 
     return django.http.HttpResponse(json.dumps(response_data), content_type="application/json", status=200)
 
