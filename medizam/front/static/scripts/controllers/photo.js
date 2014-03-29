@@ -10,6 +10,7 @@ angular.module('medizam')
             upload: function(model) {
                 Files.prototype.$save.call(model.file, function(response) {
                     $scope.previewImage = response.preview;
+
                 });
             }
         });

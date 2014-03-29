@@ -6,27 +6,32 @@ angular.module('medizam')
             {
                 name: "Zoloft 50mg",
                 image: "images/mocks/5B_3quart_low.jpg",
-                accuracy: 80
+                accuracy: 80,
+                id: 1
             },
             {
                 name: "Zoloft 50mg",
                 image: "images/mocks/5B_3quart_low.jpg",
-                accuracy: 72
+                accuracy: 72,
+                id: 2
             },
             {
                 name: "Zoloft 50mg",
                 image: "images/mocks/5B_3quart_low.jpg",
-                accuracy: 64
+                accuracy: 64,
+                id: 3
             },
             {
                 name: "Zoloft 50mg",
                 image: "images/mocks/5B_3quart_low.jpg",
-                accuracy: 49
+                accuracy: 49,
+                id: 4
             },
             {
                 name: "Zoloft 50mg",
                 image: "images/mocks/5B_3quart_low.jpg",
-                accuracy: 39
+                accuracy: 39,
+                id: 5
             }
         ];
   }]);

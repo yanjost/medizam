@@ -114,6 +114,11 @@ body {
     width: calc(50% - 15px);
 }
 
+.gallery-item a {
+    color: white;
+    text-decoration: none;
+}
+
 .gallery-item * {
     font-family: 'Open sans', sans-serif !important;
 }
