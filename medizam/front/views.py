@@ -21,6 +21,43 @@ import numpy
 
 import emm
 
+def get_medoc(id):
+    # import pdb;pdb.set_trace()
+    global medocs
+    for m in medocs :
+        if m.id == id :
+            return m
+
+
+@csrf_exempt
+def get_reference_picture(request, id):
+    global medocs
+
+    path = get_medoc(id).image_path
+
+    # import pdb; pdb.set_trace()
+
+    import os.path
+    import mimetypes
+    mimetypes.init()
+
+    try:
+        file_path = path
+        fsock = open(file_path,"r")
+        #file = fsock.read()
+        #fsock = open(file_path,"r").read()
+        file_name = os.path.basename(file_path)
+        file_size = os.path.getsize(file_path)
+        print "file size is: " + str(file_size)
+        mime_type_guess = mimetypes.guess_type(file_name)
+        if mime_type_guess is not None:
+            response = HttpResponse(fsock, mimetype=mime_type_guess[0])
+        response['Content-Disposition'] = 'attachment; filename=' + file_name
+    except IOError:
+        response = HttpResponseNotFound()
+    return response
+
+
 
 def get_nearest_medoc(medocs, pic_path):
     scores = {}
@@ -130,9 +167,9 @@ def upload(request):
     for sm in scored :
         results.append({
             "name" : sm.medoc.name,
-            "accuracy": 100 - (sm.score/16.0),
+            "accuracy": 100 - (100*sm.score/16.0),
             "score": sm.score,
-            "image":"http://placekitten.com/200/200",
+            "image":reverse('reference_picture', kwargs={"id":sm.medoc.id}),
             "id": sm.medoc.id,
             "best":sm.best
         })
@@ -340,9 +377,10 @@ def load_medocs():
             med = Medoc()
             med.id,med.name,med.dci,med.dose,med.shape,med.color1,med.color2,med.generic,med.details,med.vidal_url=data
             med.load_image()
+            med.id = med.id.strip()
             ret.append(med)
 
     return ret
 
 # global medocs
-# medocs = load_medocs()
+medocs = load_medocs()

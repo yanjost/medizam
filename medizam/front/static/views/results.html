@@ -8,7 +8,8 @@
                             <img data-ng-src="{{ result.image }}" />
                         <hr/>
                         <h2 style="text-align: center;">{{ result.name }}</h2>
-                        <h3 style="text-align: center;"><span data-ng-class="{ 'good': result.accuracy >= 95, 'average': result.accuracy < 95 && result.accuracy >= 80, 'low': result.accuracy < 80 }">{{ result.accuracy }}%</span></h3>
+                        <h3 style="text-align: center;"><span
+                                data-ng-class="{ 'good': result.accuracy >= 95, 'average': result.accuracy < 95 && result.accuracy >= 80, 'low': result.accuracy < 80 }">{{ result.accuracy | number:1 }}%</span></h3>
                         </a>
                     </div>
                 </div>
