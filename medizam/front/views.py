@@ -1,3 +1,4 @@
+import collections
 import json
 import time
 import django.http
@@ -43,6 +44,29 @@ def get_nearest_medoc(medocs, pic_path):
 
     return best_medoc, best_score, best_med
 
+ScoredMedoc = collections.namedtuple('ScoredMedoc',['medoc','score','best'])
+
+def get_scored_medoc(medocs, pic_path):
+    results = []
+
+    best_medoc = "unknown"
+    best_score = 100000
+    best_med=None
+
+    # import pdb;pdb.set_trace()
+
+    for med in medocs:
+        score = emm.emm(med.image_path, pic_path)
+
+        scored = ScoredMedoc(medoc=med, score=score, best=False)
+
+        results.append(scored)
+
+    results.sort(key=lambda x:x.score)
+
+    results[0] = ScoredMedoc(medoc=results[0].medoc,score=results[0].score,best=True)
+
+    return results
 
 @csrf_exempt
 def upload(request):
@@ -93,11 +117,27 @@ def upload(request):
 
     medocs = load_medocs()
 
-    name, score, med = get_nearest_medoc(medocs,pic_path)
+    # name, score, med = get_nearest_medoc(medocs,pic_path)
 
-    response_data["medoc_name"]=name
-    response_data["medoc_score"]=score
-    response_data["medoc_url"]=med.vidal_url
+    # response_data["medoc_name"]=name
+    # response_data["medoc_score"]=score
+    # response_data["medoc_url"]=med.vidal_url
+
+    scored = get_scored_medoc(medocs, pic_path)
+
+    results = []
+
+    for sm in scored :
+        results.append({
+            "name" : sm.medoc.name,
+            "accuracy": 100 - (sm.score/16.0),
+            "score": sm.score,
+            "image":"http://placekitten.com/200/200",
+            "id": sm.medoc.id,
+            "best":sm.best
+        })
+
+    response_data["results"]=results
 
     return django.http.HttpResponse(json.dumps(response_data), content_type="application/json", status=200)
 
