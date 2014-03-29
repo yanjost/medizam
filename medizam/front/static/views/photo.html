@@ -1,8 +1,11 @@
 <div>
     <input id="picture-input" type=file accept="image/*" class="offscreen" data-ng-model="model.file" change="upload(model)">
-    <div style="position:absolute; top:50%; left: 50%; margin-left: -45px; margin-top: -30px; text-align: center;" data-ng-click="takePicture()">
+    <div data-ng-hide="previewImage" style="position:absolute; top:50%; left: 50%; margin-left: -45px; margin-top: -30px; text-align: center;" data-ng-click="takePicture()">
         <i class="fa fa-5x fa-camera"></i>
         <br/>
         <span>Take a picture</span>
+    </div>
+    <div data-ng-show="previewImage" class="preview-image">
+        <img data-ng-src="{{ previewImage }}"/>
     </div>
 </div>

@@ -2,14 +2,14 @@
 
 angular.module('medizam')
   .controller('PhotoCtrl', [ '$scope', '$resource', function ($scope, $resource) {
-        var Files = $resource('/api/upload/:id', { id: "@id" });
+        var Files = $resource('/api/upload');
 
         angular.extend($scope, {
             model: { file: null },
 
             upload: function(model) {
-                Files.prototype.$save.call(model.file, function(self, headers) {
-                    // Handle server response
+                Files.prototype.$save.call(model.file, function(response) {
+                    $scope.previewImage = response.preview;
                 });
             }
         });

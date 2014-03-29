@@ -1,12 +1,12 @@
-<div>
-    <div class="navbar navbar-app navbar-absolute-top">
-        <div class="navbar-brand navbar-brand-center">
-            Results
-        </div>
-
-        <div class="btn-group pull-left">
-            <div class="btn btn-navbar">
-                <i class="fa fa-chevron-left"></i> Back
+<div class="container scrollable">
+    <div class="row gallery scrollable-content">
+        <div class="col-xs-6" data-ng-repeat="result in results">
+            <div class="row">
+                <a href="#" class="">
+                    <img data-ng-src="{{ result.image }}" />
+                </a>
+                <br/>
+                <span>{{ result.name }}</span>
             </div>
         </div>
     </div>
