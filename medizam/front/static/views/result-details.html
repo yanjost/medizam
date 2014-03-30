@@ -1,3 +1,4 @@
-<div>
-    <h1>Result details for {{ resultId }}</h1>
+<div style="overflow:auto;-webkit-overflow-scrolling:touch;">
+    <h1>Details for {{ result.name }}</h1>
+    <iframe class="vidal" data-ng-src="{{ result.vidal_url }}"></iframe>
 </div>

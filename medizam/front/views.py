@@ -29,21 +29,14 @@ def get_medoc(id):
             return m
 
 
-@csrf_exempt
-def get_reference_picture(request, id):
-    global medocs
-
-    path = get_medoc(id).image_path
-
-    # import pdb; pdb.set_trace()
-
+def file_as_response(path):
     import os.path
     import mimetypes
     mimetypes.init()
 
     try:
         file_path = path
-        fsock = open(file_path,"r")
+        fsock = open(file_path, "r")
         #file = fsock.read()
         #fsock = open(file_path,"r").read()
         file_name = os.path.basename(file_path)
@@ -54,8 +47,31 @@ def get_reference_picture(request, id):
             response = HttpResponse(fsock, mimetype=mime_type_guess[0])
         response['Content-Disposition'] = 'attachment; filename=' + file_name
     except IOError:
+        print "PATH NOT FOUND "+path
         response = HttpResponseNotFound()
     return response
+
+
+@csrf_exempt
+def get_reference_picture(request, id):
+    global medocs
+
+    path = get_medoc(id).image_path
+
+    # import pdb; pdb.set_trace()
+    response = file_as_response(path)
+    return response
+
+@csrf_exempt
+def get_display_picture(request, id):
+    global medocs
+
+    path = get_medoc(id).display_image_path
+
+    # import pdb; pdb.set_trace()
+    response = file_as_response(path)
+    return response
+
 
 
 
@@ -169,9 +185,10 @@ def upload(request):
             "name" : sm.medoc.name,
             "accuracy": 100 - (100*sm.score/16.0),
             "score": sm.score,
-            "image":reverse('reference_picture', kwargs={"id":sm.medoc.id}),
+            "image":reverse('display_picture', kwargs={"id":sm.medoc.id}),
             "id": sm.medoc.id,
-            "best":sm.best
+            "best":sm.best,
+            "vidal_url":sm.medoc.vidal_url
         })
 
     response_data["results"]=results
@@ -345,6 +362,7 @@ class Medoc(object):
         self.details=""
         self.vidal_url=""
         self.image_path=""
+        self.display_image_path=""
 
     def load_image(self):
         import glob
@@ -353,6 +371,8 @@ class Medoc(object):
         self.image_path = glob.glob(zg)[0]
         print "Loading {}".format(self.image_path)
         self.image = cv2.imread(self.image_path)
+        self.display_image_path="/Users/yannick/Documents/programmation/medizam/medizam/private/display/{}.png".format(
+            self.id)
 
 
 

@@ -90,6 +90,7 @@ def equalizeRgb(img):
 
 ### MAIN ########################################################################
 def emm(src1,src2):
+    import numpy as np
     # #Load image 1
     src1 = cv.LoadImage(src1)
     #
@@ -102,6 +103,10 @@ def emm(src1,src2):
     # cv.EqualizeHist(src2,src2)
     #src1 = equalizeRgb(src1)
     #src2 = equalizeRgb(src2)
+
+    lut = np.arange(256, dtype = "uint8")
+
+
 
     imwrite("tmp/equalized.jpg",cv2array(src2))
 
