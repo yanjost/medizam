@@ -110,8 +110,17 @@ body {
 
 .gallery-item {
     background-color: rgba(255,255,255,0.5);
-    margin: 10px 0 10px 10px;
-    width: calc(50% - 20px);
+    margin: 10px 0 0 10px;
+    width: calc(50% - 15px);
+}
+
+.gallery-item.best {
+    width: calc(100% - 20px);
+}
+
+.gallery-item.best img {
+    display: block;
+    margin: 0 auto;
 }
 
 .gallery-item a {
