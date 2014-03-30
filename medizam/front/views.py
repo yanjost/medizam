@@ -1,10 +1,11 @@
 import collections
 import json
+import random
 import time
 import django.http
 from django.shortcuts import render
 
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound,StreamingHttpResponse
 
 # Create your views here.
 import django.views.generic
@@ -41,10 +42,10 @@ def file_as_response(path):
         #fsock = open(file_path,"r").read()
         file_name = os.path.basename(file_path)
         file_size = os.path.getsize(file_path)
-        print "file size is: " + str(file_size)
+        # print "file size is: " + str(file_size)
         mime_type_guess = mimetypes.guess_type(file_name)
         if mime_type_guess is not None:
-            response = HttpResponse(fsock, mimetype=mime_type_guess[0])
+            response = StreamingHttpResponse(fsock, mimetype=mime_type_guess[0])
         response['Content-Disposition'] = 'attachment; filename=' + file_name
     except IOError:
         print "PATH NOT FOUND "+path
@@ -129,8 +130,12 @@ def upload(request):
     response_data = {}
     response_data['result'] = 'OK'
 
+    request_id = random.randint(0, 10000)
 
-    pic_path = "tmp/received.jpg"
+
+    pic_path = "tmp/received{}.jpg".format(request_id)
+
+    print "SAVING TO : "+pic_path
 
     if os.path.exists(pic_path):
         os.remove(pic_path)
@@ -208,10 +213,10 @@ def get_processed(request):
         #fsock = open(file_path,"r").read()
         file_name = os.path.basename(file_path)
         file_size = os.path.getsize(file_path)
-        print "file size is: " + str(file_size)
+        # print "file size is: " + str(file_size)
         mime_type_guess = mimetypes.guess_type(file_name)
         if mime_type_guess is not None:
-            response = HttpResponse(fsock, mimetype=mime_type_guess[0])
+            response = StreamingHttpResponse(fsock, mimetype=mime_type_guess[0])
         response['Content-Disposition'] = 'attachment; filename=' + file_name
     except IOError:
         response = HttpResponseNotFound()
@@ -260,7 +265,7 @@ def process_picture(data):
 
     #cv2.imwrite(out_path,gray)
 
-    print out_path
+    print "FILE WRITTEN TO "+out_path
 
     return out_path, contours
 
