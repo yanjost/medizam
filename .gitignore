@@ -2,3 +2,4 @@ venv
 *.pyc
 medizam/static
 .idea
+medizam/tmp
