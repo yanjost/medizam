@@ -3,14 +3,14 @@
         <div class="container">
             <div class="row gallery">
                 <div class="col-xs-6 gallery-item"
-                     data-ng-class="{ 'right': $index % 2 == 0, 'best': result.best }"data-ng-repeat="result in results">
+                     data-ng-class="{ 'right': $index % 2 == 0, 'best': result.best }" data-ng-repeat="result in results">
                     <div class="row">
                         <a data-ng-href="#/results/{{ result.id }}/details">
                             <img data-ng-src="{{ result.image }}" />
                         <hr/>
                         <h3 style="text-transform: uppercase; text-align: center;">{{ result.name }}</h3>
                         <h3 style="text-align: center;"><span
-                                data-ng-class="{ 'good': result.accuracy >= 95, 'average': result.accuracy < 95 && result.accuracy >= 80, 'low': result.accuracy < 80 }">{{ result.accuracy | number:1 }}%</span></h3>
+                                data-ng-class="{ 'good': result.accuracy >= 75, 'average': result.accuracy < 75 && result.accuracy >= 65, 'low': result.accuracy < 65 }">{{ result.accuracy | number:1 }}%</span></h3>
                         </a>
                     </div>
                 </div>

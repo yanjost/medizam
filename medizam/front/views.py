@@ -186,9 +186,18 @@ def upload(request):
     results = []
 
     for sm in scored :
+
+        percent = 100 - (100*sm.score/16.0)
+
+        if sm.best:
+            percent+= (100 - percent)*0.8
+
+        if percent <=0.0 :
+            percent = 0.0
+
         results.append({
             "name" : sm.medoc.name,
-            "accuracy": 100 - (100*sm.score/16.0),
+            "accuracy": percent,
             "score": sm.score,
             "image":reverse('display_picture', kwargs={"id":sm.medoc.id}),
             "id": sm.medoc.id,
